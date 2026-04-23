@@ -185,7 +185,7 @@
 <script setup>
 import { computed, onMounted, reactive, ref } from "vue"
 
-const apiHost = `${window.location.protocol}//${window.location.hostname}:8880`
+const apiHost = `${window.location.protocol}//${window.location.hostname}:28823`
 const apiBase = `${apiHost}/api`
 const submitting = ref(false)
 const showImportModal = ref(false)
