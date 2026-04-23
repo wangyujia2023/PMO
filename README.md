@@ -18,14 +18,14 @@
 ### 1. 初始化
 
 ```bash
-chmod +x scripts/init.sh scripts/start.sh
-./scripts/init.sh
+chmod +x init.sh start.sh scripts/init.sh scripts/start.sh
+./init.sh
 ```
 
 ### 2. 启动
 
 ```bash
-./scripts/start.sh
+./start.sh
 ```
 
 前端访问：`http://服务器IP:28822`

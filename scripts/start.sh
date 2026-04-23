@@ -1,11 +1,21 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [ -f "$SCRIPT_DIR/server/main.py" ]; then
+  ROOT_DIR="$SCRIPT_DIR"
+else
+  ROOT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+fi
 cd "$ROOT_DIR"
 
 BACKEND_PORT="${BACKEND_PORT:-28823}"
 FRONTEND_PORT="${FRONTEND_PORT:-28822}"
+
+if [ ! -x ".venv/bin/python" ]; then
+  echo ".venv missing. Run ./init.sh first." >&2
+  exit 1
+fi
 
 cleanup() {
   if [ -n "${BACKEND_PID:-}" ]; then
