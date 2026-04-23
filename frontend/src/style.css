@@ -1,0 +1,40 @@
+:root {
+  --bg: #081427;
+  --bg-panel: #10203c;
+  --bg-panel-2: #14284c;
+  --bg-panel-3: #0d1930;
+  --text: #e7eefc;
+  --muted: #8ea4c9;
+  --line: rgba(116, 147, 199, 0.16);
+  --cyan: #18d0ff;
+  --green: #20d69b;
+  --amber: #ffb545;
+  --red: #ff5f73;
+  --shadow: 0 20px 60px rgba(1, 9, 24, 0.45);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "IBM Plex Sans SC", sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(24, 208, 255, 0.12), transparent 24%),
+    radial-gradient(circle at 85% 15%, rgba(32, 214, 155, 0.1), transparent 18%),
+    linear-gradient(180deg, #091427 0%, #08111f 100%);
+  min-height: 100vh;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+  color: var(--text);
+}
+
+#app {
+  min-height: 100vh;
+}
