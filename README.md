@@ -5,7 +5,7 @@
 - 前端：Vue 3 + Vite
 - 后端：FastAPI
 - 存储：MySQL
-- 能力：项目 x 周矩阵、JSON 导入、模糊项目匹配、按项目名/周查询、编辑与删除
+- 能力：项目 x 周矩阵、全年矩阵、月度盘点、JSON 导入、模糊项目匹配、多模型配置、编辑与删除
 
 ## 目录
 
@@ -15,14 +15,25 @@
 
 ## 启动
 
-### 1. 初始化
+### 1. 准备配置
 
 ```bash
 chmod +x init.sh start.sh scripts/init.sh scripts/start.sh
+cp .env.example .env
+vi .env
+```
+
+把 `.env` 里的 MySQL 密码和模型 API Key 改成服务器真实配置。
+
+### 2. 初始化
+
+```bash
 ./init.sh
 ```
 
-### 2. 启动
+如果直接执行 `./init.sh` 时还没有 `.env`，脚本会自动生成 `.env` 并提示你先补配置。
+
+### 3. 启动
 
 ```bash
 ./start.sh
@@ -40,13 +51,34 @@ chmod +x init.sh start.sh scripts/init.sh scripts/start.sh
 MYSQL_HOST=10.26.20.3
 MYSQL_PORT=23336
 MYSQL_USER=root
-MYSQL_PASSWORD=123456
+MYSQL_PASSWORD=你的密码
 MYSQL_DATABASE=pmo
 GEMINI_API_KEY=
 GEMINI_MODEL=gemini-2.5-flash
 CORS_ORIGINS=http://localhost:28822
 ```
 
-导入解析默认优先调用 Gemini Structured Output，将周报抽成 JSON 后再入库。官方文档参考：
-- [Gemini Structured Outputs](https://ai.google.dev/gemini-api/docs/structured-output)
-- [Gemini API reference](https://ai.google.dev/api)
+## 部署
+
+服务器上拉代码后执行：
+
+```bash
+git clone git@github.com:wangyujia2023/PMO.git
+cd PMO
+chmod +x init.sh start.sh scripts/init.sh scripts/start.sh
+cp .env.example .env
+vi .env
+./init.sh
+./start.sh
+```
+
+默认端口：
+
+- 前端：`28822`
+- 后端：`28823`
+
+如果要改端口：
+
+```bash
+FRONTEND_PORT=28822 BACKEND_PORT=28823 ./start.sh
+```

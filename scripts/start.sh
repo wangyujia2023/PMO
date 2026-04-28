@@ -17,6 +17,11 @@ if [ ! -x ".venv/bin/python" ]; then
   exit 1
 fi
 
+if [ ! -f ".env" ]; then
+  echo ".env missing. Run ./init.sh and update .env first." >&2
+  exit 1
+fi
+
 cleanup() {
   if [ -n "${BACKEND_PID:-}" ]; then
     kill "$BACKEND_PID" 2>/dev/null || true

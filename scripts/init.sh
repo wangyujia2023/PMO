@@ -9,6 +9,18 @@ else
 fi
 cd "$ROOT_DIR"
 
+if [ ! -f ".env" ]; then
+  if [ -f ".env.example" ]; then
+    cp ".env.example" ".env"
+    echo "Created .env from .env.example."
+    echo "Please update .env with MYSQL_PASSWORD and model API keys, then rerun ./init.sh."
+    exit 0
+  else
+    echo ".env not found. Create one with MySQL and model settings before continuing." >&2
+    exit 1
+  fi
+fi
+
 if [ ! -d ".venv" ]; then
   PYTHON_BIN="${PYTHON_BIN:-python3}"
   "$PYTHON_BIN" -m venv .venv
@@ -24,7 +36,11 @@ fi
 
 if [ -d "frontend" ]; then
   cd "$ROOT_DIR/frontend"
-  npm install
+  if [ -f "package-lock.json" ]; then
+    npm ci
+  else
+    npm install
+  fi
 fi
 
 cd "$ROOT_DIR"
